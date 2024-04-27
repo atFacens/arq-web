@@ -76,4 +76,12 @@ public class UserAppService {
     public UserApp getByEmail(String email) {
         return repo.findByEmail(email);
     }
+
+    public UserApp buscarPorEmail(String email) {
+        return repo.buscarPorEmail(email);
+    }
+
+    public UserApp buscarNativoPorEmail(String email) {
+        return repo.buscarPorEmail(email);
+    }
 }

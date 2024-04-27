@@ -57,6 +57,26 @@ public class UserAppController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/email2/{email}")
+    public ResponseEntity<UserApp> getUserbyEmail(@PathVariable String email) {
+        UserApp user = service.buscarPorEmail(email);
+
+        if(user != null) {
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/email3/{email}")
+    public ResponseEntity<UserApp> getUserNativeByEmail(@PathVariable String email) {
+        UserApp user = service.buscarNativoPorEmail(email);
+
+        if(user != null) {
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping
     public ResponseEntity<List<UserApp>> getAllUserApp() {
         List<UserApp> listUser = service.getAllUserApp();
