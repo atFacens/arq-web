@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.facens.projeto03.model.UserApp;
+import br.facens.projeto03.model.UserAppDTO;
 import br.facens.projeto03.service.UserAppService;
 
 @RestController
@@ -40,6 +41,16 @@ public class UserAppController {
     @GetMapping("/{id}")
     public ResponseEntity<UserApp> getUserApp(@PathVariable long id) {
         Optional<UserApp> userOptinal = service.getUserApp(id);
+
+        if(userOptinal.isPresent()) {
+            return ResponseEntity.ok(userOptinal.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/dto/{id}")
+    public ResponseEntity<UserAppDTO> getUserAppDTO(@PathVariable long id) {
+        Optional<UserAppDTO> userOptinal = service.getUserAppDTO(id);
 
         if(userOptinal.isPresent()) {
             return ResponseEntity.ok(userOptinal.get());

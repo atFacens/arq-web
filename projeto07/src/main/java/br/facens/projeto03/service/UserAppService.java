@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.facens.projeto03.model.UserApp;
+import br.facens.projeto03.model.UserAppDTO;
 import br.facens.projeto03.repository.UserAppRepo;
 
 @Service
@@ -26,6 +27,16 @@ public class UserAppService {
         Optional<UserApp> user = repo.findById(id);
 
         return user;
+    }
+
+    public Optional<UserAppDTO> getUserAppDTO(long id) {
+        Optional<UserApp> userOptional = repo.findById(id);
+
+        if(userOptional.isEmpty()){
+            return Optional.ofNullable(null);
+        }
+        UserAppDTO userAppDTO = new UserAppDTO(userOptional.get());
+        return Optional.of(userAppDTO);
     }
 
     public List<UserApp> getAllUserApp() {
