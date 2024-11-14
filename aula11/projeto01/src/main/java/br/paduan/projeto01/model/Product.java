@@ -1,9 +1,13 @@
 package br.paduan.projeto01.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -12,6 +16,11 @@ public class Product {
     private int id;
     private String name;
     private double value;
+
+    @ManyToOne
+    @JoinColumn(name = "id_supplier")
+    @JsonIgnoreProperties("products")
+    private Supplier supplier;
     
     public Product() {
     }
@@ -45,4 +54,13 @@ public class Product {
     public void setValue(double value) {
         this.value = value;
     }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
 }
