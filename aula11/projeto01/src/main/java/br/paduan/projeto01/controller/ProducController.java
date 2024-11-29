@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.paduan.projeto01.model.Product;
+import br.paduan.projeto01.model.dto.ProductDTO;
 import br.paduan.projeto01.service.ProductService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/produto")
@@ -48,8 +50,8 @@ public class ProducController {
 
 
     @PostMapping
-    public ResponseEntity<Product> insert(@RequestBody Product product) {
-        Optional<Product> optionalProduct = service.insert(product);
+    public ResponseEntity<Product> insert(@RequestBody @Valid ProductDTO productDto) {
+        Optional<Product> optionalProduct = service.insert(productDto.toProduct());
 
         if(optionalProduct.isEmpty()) {
             return ResponseEntity.badRequest().build();

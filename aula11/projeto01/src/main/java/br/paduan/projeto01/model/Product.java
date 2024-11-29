@@ -2,6 +2,7 @@ package br.paduan.projeto01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 1, 2, 3, 4,....
     private int id;
+
+    @Column(nullable = false)
     private String name;
     private double value;
 
